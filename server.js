@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
@@ -33,7 +34,7 @@ const SCOPES = ['https://www.googleapis.com/auth/drive.readonly'];
 const oauth2Client = new google.auth.OAuth2(
     process.env.GOOGLE_CLIENT_ID || 'your_client_id',
     process.env.GOOGLE_CLIENT_SECRET || 'your_client_secret',
-    process.env.GOOGLE_CALLBACK_URL || 'http://localhost:3000/auth/google/callback'
+    process.env.GOOGLE_REDIRECT_URI || process.env.GOOGLE_CALLBACK_URL || 'http://localhost:3000/auth/google/callback'
 );
 
 function saveTokens(tokens) {
