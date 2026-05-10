@@ -49,7 +49,7 @@ function saveTokens(tokens) {
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static(path.join(__dirname)));
+app.use(express.static(path.join(__dirname), { index: false }));
 
 // Routes
 
@@ -105,8 +105,13 @@ app.get('/NABS.jpeg', (req, res) => {
     res.sendFile(path.join(__dirname, 'NABS.jpeg'));
 });
 
-// GET - Serve main portfolio page
+// GET - Serve landing page as the root homepage
 app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'landing.html'));
+});
+
+// GET - Serve portfolio page explicitly if requested
+app.get('/index.html', (req, res) => {
     res.sendFile(path.join(__dirname, 'index.html'));
 });
 
